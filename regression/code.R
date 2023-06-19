@@ -93,7 +93,7 @@ for(ntree in ntree.grid){
             print(paste('fold:',i))
             data<-x.train[[i]]
             data$label<-y.train[[i]]
-            RF.fit <- randomForest(as.matrix(x.train[[i]]),as.numeric(y.train[[i]]))
+            RF.fit <- randomForest(as.matrix(x.train[[i]]),as.numeric(y.train[[i]]),ntree=ntree,mtry=mtry)
             y.vali.pred.rf<-predict(RF.fit,x.vali[[i]])
             y.vali.pred.randomForest.total<-c(y.vali.pred.randomForest.total, y.vali.pred.rf)
         }
@@ -134,7 +134,7 @@ for(gamma in gamma.list){
         print(paste('fold:',i))
         data<-x.train[[i]]
         data$label<-y.train[[i]]
-        svr.fit <- svm(as.matrix(x.train[[i]]),as.numeric(y.train[[i]]))
+        svr.fit <- svm(as.matrix(x.train[[i]]),as.numeric(y.train[[i]]),gamma=gamma,cost=cost)
         y.vali.pred.svr<-predict(svr.fit,as.matrix(x.vali[[i]]))
         y.vali.pred.svr.total<-c(y.vali.pred.svr.total, y.vali.pred.svr)
     }
